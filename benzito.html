@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEHEHEHEHEHEHEHEHE</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            flex-direction: column;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="currentText">Volte em:</h1>
+    <p id="timer">Carregando...</p>
+
+    <script>
+        // Definir os marcos de tempo
+        const time1 = new Date("2024-09-28T13:15:00").getTime();
+        const time2 = new Date("2024-09-28T14:00:00").getTime();
+        const time3 = new Date("2024-09-28T14:35:00").getTime();
+        const time4 = new Date("2024-09-28T15:30:00").getTime();
+
+        // Atualizar a contagem regressiva a cada segundo
+        const countdown = setInterval(function() {
+            const now = new Date().getTime();  // Pega o tempo atual
+
+            // Variável para definir a próxima data alvo e o texto correspondente
+            let targetDate, newText;
+
+            // Atualizar o texto e a contagem regressiva com base nos marcos de tempo
+            if (now >= time4) {
+                document.getElementById("currentText").innerHTML = "Boa sorte";
+                clearInterval(countdown);  // Interrompe a contagem após o último marco
+                document.getElementById("timer").innerHTML = "Fim da contagem!";
+                return;  // Sai da função, já que não precisa de mais atualizações
+            } else if (now >= time3) {
+                targetDate = time4;
+                newText = "Vá até: -23.5025898,-46.6249222";
+            } else if (now >= time2) {
+                targetDate = time3;
+                newText = "Vá até: -23.5367613,-46.634897";
+            } else if (now >= time1) {
+                targetDate = time2;
+                newText = "Vá até: -23.4053501,-46.7535228";
+            } else {
+                targetDate = time1;
+                newText = "Volte em:";  // Antes das 13:15
+            }
+
+            // Atualizar o texto conforme o marco de tempo atual
+            document.getElementById("currentText").innerHTML = newText;
+
+            // Calcular o tempo restante até o próximo marco
+            const timeRemaining = targetDate - now;
+
+            // Verificar se o tempo restante é maior que 0 (para exibir corretamente)
+            if (timeRemaining > 0) {
+                const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+                // Exibir a contagem regressiva no elemento "timer"
+                document.getElementById("timer").innerHTML = 
+                    days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+            } else {
+                // Se o tempo restante for 0 ou menos, exibe a contagem finalizada
+                document.getElementById("timer").innerHTML = "Contagem finalizada!";
+            }
+        }, 1000);  // Atualiza a cada segundo
+    </script>
+</body>
+</html>
